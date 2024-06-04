@@ -53,15 +53,3 @@ resource "aws_ssm_patch_group" "al2023_patch_group" {
   baseline_id = aws_ssm_patch_baseline.al2023_patch_baseline.id
   patch_group = "AmazonLinux2023PatchGroup"
 }
-
-output "patch_baseline_id" {
-  value = aws_ssm_patch_baseline.al2023_patch_baseline.id
-}
-
-output "patch_group" {
-  value = aws_ssm_patch_group.al2023_patch_group.patch_group
-}
-
-output "instance_id" {
-  value = aws_instance.my_instance.id
-}
