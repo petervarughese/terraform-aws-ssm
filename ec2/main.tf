@@ -6,49 +6,50 @@ resource "aws_instance" "example_server" {
     PatchGroup  = aws_ssm_patch_group.al2023_patch_group.patch_group
   }
 }
-resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
-  name        = "AmazonLinux2023PatchBaseline"
-  description = "Patch baseline for Amazon Linux 2"
+resource "aws_ssm_patch_baseline" "al2_patch_baseline" {
+  name             = "AmazonLinux2PatchBaseline"
+  description      = "Patch baseline for Amazon Linux 2"
   operating_system = "AMAZON_LINUX_2"
 
   approval_rule {
     patch_filter {
-      key = "PRODUCT"
-      values = ["AmazonLinux2023"]
+      key    = "PRODUCT"
+      values = ["AmazonLinux2"]
     }
 
     patch_filter {
-      key = "CLASSIFICATION"
+      key    = "CLASSIFICATION"
       values = ["Security", "Bugfix"]
     }
 
-    compliance_level = "CRITICAL"
-    approve_after_days = 7
+    compliance_level    = "CRITICAL"
+    approve_after_days  = 7
     enable_non_security = true
   }
 
   approval_rule {
     patch_filter {
-      key = "PRODUCT"
-      values = ["AmazonLinux2023"]
+      key    = "PRODUCT"
+      values = ["AmazonLinux2"]
     }
 
     patch_filter {
-      key = "SEVERITY"
+      key    = "SEVERITY"
       values = ["Critical", "Important"]
     }
 
-    compliance_level = "CRITICAL"
-    approve_after_days = 0
+    compliance_level    = "CRITICAL"
+    approve_after_days  = 0
     enable_non_security = false
   }
 
   tags = {
-    Name = "AmazonLinux2023PatchBaseline"
+    Name = "AmazonLinux2PatchBaseline"
   }
 }
 
-resource "aws_ssm_patch_group" "al2023_patch_group" {
-  baseline_id = aws_ssm_patch_baseline.al2023_patch_baseline.id
-  patch_group = "AmazonLinux2023PatchGroup"
+resource "aws_ssm_patch_group" "al2_patch_group" {
+  baseline_id = aws_ssm_patch_baseline.al2_patch_baseline.id
+  patch_group = "AmazonLinux2PatchGroup"
 }
+
