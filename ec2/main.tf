@@ -20,7 +20,7 @@ resource "aws_ssm_patch_baseline" "al2_patch_baseline" {
 
     patch_filter {
       key    = "CLASSIFICATION"
-      values = ["Security", "Bugfix"]
+      values = ["Security", "Bugfix", "Feature", "Enhancement", "Other"]
     }
 
     compliance_level    = "CRITICAL"
@@ -36,7 +36,7 @@ resource "aws_ssm_patch_baseline" "al2_patch_baseline" {
 
     patch_filter {
       key    = "SEVERITY"
-      values = ["Critical", "Important"]
+      values = ["Critical", "Important", "Medium", "Low", "Informational", "Unspecified"]
     }
 
     compliance_level    = "CRITICAL"
@@ -136,10 +136,5 @@ resource "aws_ssm_association" "patch_association" {
   targets {
     key    = "tag:PatchGroup"
     values = [aws_ssm_patch_group.al2_patch_group.patch_group]
-  }
-
-  output_location {
-    s3_bucket_name = "my-patch-logs-bucket" # Replace with your S3 bucket for logs
-    s3_key_prefix  = "patch-logs/"
   }
 }
