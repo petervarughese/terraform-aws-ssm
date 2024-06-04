@@ -51,5 +51,5 @@ resource "aws_ssm_patch_baseline" "al2_patch_baseline" {
 
 resource "aws_ssm_patch_group" "al2_patch_group" {
   baseline_id = aws_ssm_patch_baseline.al2_patch_baseline.id
-  patch_group = "AmazonLinux2PatchGroup"
+  patch_group = "AmazonLinux2PatchGroup-unique"  # Use a unique name here
 }
