@@ -7,14 +7,14 @@ resource "aws_instance" "example_server" {
   }
 }
 resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
-  name        = "AmazonLinux2PatchBaseline"
+  name        = "AmazonLinux2023PatchBaseline"
   description = "Patch baseline for Amazon Linux 2"
   operating_system = "AMAZON_LINUX_2"
 
   approval_rule {
     patch_filter {
       key = "PRODUCT"
-      values = ["AmazonLinux2"]
+      values = ["AmazonLinux2023"]
     }
 
     patch_filter {
@@ -30,7 +30,7 @@ resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
   approval_rule {
     patch_filter {
       key = "PRODUCT"
-      values = ["AmazonLinux2"]
+      values = ["AmazonLinux2023"]
     }
 
     patch_filter {
@@ -44,11 +44,11 @@ resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
   }
 
   tags = {
-    Name = "AmazonLinux2PatchBaseline"
+    Name = "AmazonLinux2023PatchBaseline"
   }
 }
 
 resource "aws_ssm_patch_group" "al2023_patch_group" {
   baseline_id = aws_ssm_patch_baseline.al2023_patch_baseline.id
-  patch_group = "AmazonLinux2PatchGroup"
+  patch_group = "AmazonLinux2023PatchGroup"
 }
