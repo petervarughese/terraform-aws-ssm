@@ -87,8 +87,8 @@ resource "aws_ssm_patch_group" "al2023_patch_group" {
 }
 
 resource "aws_ssm_maintenance_window" "example" {
-  name               = "ExampleMaintenanceWindow"
-  schedule           = "cron(0 19 * * ? *)" # This is the cron expression for 7 PM every day
+  name               = "linux-prod-3rd-week-Tuesday-11pm-3am"
+  schedule           = "cron(40 07 * * ? *)" # This is the cron expression for 7 PM every day
   duration           = 1
   cutoff             = 0
   allow_unassociated_targets = true
