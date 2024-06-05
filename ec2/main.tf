@@ -6,6 +6,7 @@ resource "aws_instance" "example_server" {
     PatchGroup  = aws_ssm_patch_group.al2023_patch_group.patch_group
   }
 }
+
 resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
   name        = "AmazonLinux2PatchBaseline"
   description = "Patch baseline for Amazon Linux 2"
@@ -41,6 +42,86 @@ resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
     compliance_level = "CRITICAL"
     approve_after_days = 0
     enable_non_security = false
+  }
+
+  approval_rule {
+    patch_filter {
+      key = "PRODUCT"
+      values = ["AmazonLinux2"]
+    }
+
+    patch_filter {
+      key = "SEVERITY"
+      values = ["Medium"]
+    }
+
+    compliance_level = "HIGH"
+    approve_after_days = 14
+    enable_non_security = true
+  }
+
+  approval_rule {
+    patch_filter {
+      key = "PRODUCT"
+      values = ["AmazonLinux2"]
+    }
+
+    patch_filter {
+      key = "SEVERITY"
+      values = ["Low"]
+    }
+
+    compliance_level = "MEDIUM"
+    approve_after_days = 30
+    enable_non_security = true
+  }
+
+  approval_rule {
+    patch_filter {
+      key = "PRODUCT"
+      values = ["AmazonLinux2"]
+    }
+
+    patch_filter {
+      key = "SEVERITY"
+      values = ["Informational"]
+    }
+
+    compliance_level = "LOW"
+    approve_after_days = 45
+    enable_non_security = true
+  }
+
+  approval_rule {
+    patch_filter {
+      key = "PRODUCT"
+      values = ["AmazonLinux2"]
+    }
+
+    patch_filter {
+      key = "SEVERITY"
+      values = ["Informational"]
+    }
+
+    compliance_level = "INFORMATIONAL"
+    approve_after_days = 60
+    enable_non_security = true
+  }
+
+  approval_rule {
+    patch_filter {
+      key = "PRODUCT"
+      values = ["AmazonLinux2"]
+    }
+
+    patch_filter {
+      key = "SEVERITY"
+      values = ["Unspecified"]
+    }
+
+    compliance_level = "UNSPECIFIED"
+    approve_after_days = 90
+    enable_non_security = true
   }
 
   tags = {
