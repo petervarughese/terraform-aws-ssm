@@ -87,8 +87,9 @@ resource "aws_ssm_patch_group" "al2023_patch_group" {
 }
 
 resource "aws_ssm_maintenance_window" "example" {
-  name               = "linux-prod-3rd-week-Tuesday-11pm-3am"
-  schedule           = "cron(37 07 * * ? *)" # This is the cron expression for 7 PM every day
+  name               = "ExampleMaintenanceWindow"
+  schedule           = "cron(45 7 5 6 ? 2024)" # This is the cron expression for 7:45 AM CST on June 5, 2024
+  schedule_timezone  = "CST6CDT" # Central Standard Time (CST)
   duration           = 1
   cutoff             = 0
   allow_unassociated_targets = true
