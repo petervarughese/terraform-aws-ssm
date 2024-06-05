@@ -95,6 +95,18 @@ resource "aws_ssm_maintenance_window" "example" {
   enabled            = true
 }
 
+resource "aws_ssm_maintenance_window_target" "example" {
+  window_id = aws_ssm_maintenance_window.example.id
+  name      = "ProdInstances"
+  description = "Target instances with the tag Environment=prod"
+  resource_type = "INSTANCE"
+
+  targets {
+    key    = "tag:Environment"
+    values = ["prod"]
+  }
+}
+
 resource "aws_ssm_maintenance_window_task" "example" {
   window_id          = aws_ssm_maintenance_window.example.id
   max_concurrency    = "1"
@@ -104,8 +116,8 @@ resource "aws_ssm_maintenance_window_task" "example" {
   task_type          = "RUN_COMMAND"
 
   targets {
-    key    = "tag:Environment"
-    values = ["prod"]
+    key    = "WindowTargetIds"
+    values = [aws_ssm_maintenance_window_target.example.id]
   }
 
   task_invocation_parameters {
