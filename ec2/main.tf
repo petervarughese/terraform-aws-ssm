@@ -3,7 +3,7 @@ resource "aws_instance" "example_server" {
   instance_type = var.web_instance_type
   tags = {
     Name        = "MyAmazonLinux2023Instance"
-    PatchGroup  = aws_ssm_patch_group.al2023_patch_group.patch_group
+    Environment = "prod"
   }
 }
 
@@ -104,8 +104,8 @@ resource "aws_ssm_maintenance_window_task" "example" {
   task_type          = "RUN_COMMAND"
 
   targets {
-    key    = "tag:PatchGroup"
-    values = ["AmazonLinux2PatchGroup"]
+    key    = "tag:Environment"
+    values = ["prod"]
   }
 
   task_invocation_parameters {
