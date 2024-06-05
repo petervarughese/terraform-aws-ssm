@@ -76,54 +76,6 @@ resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
     enable_non_security = true
   }
 
-  approval_rule {
-    patch_filter {
-      key = "PRODUCT"
-      values = ["AmazonLinux2"]
-    }
-
-    patch_filter {
-      key = "SEVERITY"
-      values = ["Informational"]
-    }
-
-    compliance_level = "LOW"
-    approve_after_days = 45
-    enable_non_security = true
-  }
-
-  approval_rule {
-    patch_filter {
-      key = "PRODUCT"
-      values = ["AmazonLinux2"]
-    }
-
-    patch_filter {
-      key = "SEVERITY"
-      values = ["Informational"]
-    }
-
-    compliance_level = "INFORMATIONAL"
-    approve_after_days = 60
-    enable_non_security = true
-  }
-
-  approval_rule {
-    patch_filter {
-      key = "PRODUCT"
-      values = ["AmazonLinux2"]
-    }
-
-    patch_filter {
-      key = "SEVERITY"
-      values = ["Unspecified"]
-    }
-
-    compliance_level = "UNSPECIFIED"
-    approve_after_days = 90
-    enable_non_security = true
-  }
-
   tags = {
     Name = "AmazonLinux2PatchBaseline"
   }
