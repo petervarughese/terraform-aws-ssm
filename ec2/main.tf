@@ -41,7 +41,7 @@ resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
 
     compliance_level = "CRITICAL"
     approve_after_days = 0
-    enable_non_security = false
+    enable_non_security = true
   }
 
   approval_rule {
@@ -84,4 +84,57 @@ resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
 resource "aws_ssm_patch_group" "al2023_patch_group" {
   baseline_id = aws_ssm_patch_baseline.al2023_patch_baseline.id
   patch_group = "AmazonLinux2PatchGroup"
+}
+
+resource "aws_ssm_maintenance_window" "example" {
+  name               = "ExampleMaintenanceWindow"
+  schedule           = "cron(0 19 * * ? *)" # This is the cron expression for 7 PM every day
+  duration           = 1
+  cutoff             = 0
+  allow_unassociated_targets = true
+  enabled            = true
+}
+
+resource "aws_ssm_maintenance_window_task" "example" {
+  window_id          = aws_ssm_maintenance_window.example.id
+  max_concurrency    = "1"
+  max_errors         = "1"
+  task_arn           = "AWS-PatchInstanceWithRollback"
+  service_role_arn   = aws_iam_role.ssm_service_role.arn
+  task_type          = "RUN_COMMAND"
+
+  targets {
+    key    = "tag:PatchGroup"
+    values = ["AmazonLinux2PatchGroup"]
+  }
+
+  task_invocation_parameters {
+    run_command_parameters {
+      comment                  = "Patch Instances"
+      document_hash            = "PatchDocument"
+      timeout_seconds          = 3600
+    }
+  }
+}
+
+resource "aws_iam_role" "ssm_service_role" {
+  name = "SSMServiceRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
+        Principal = {
+          Service = "ssm.amazonaws.com"
+        },
+      },
+    ],
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "ssm_service_role_policy" {
+  role       = aws_iam_role.ssm_service_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonSSMMaintenanceWindowRole"
 }
