@@ -90,7 +90,7 @@ resource "aws_ssm_maintenance_window" "example" {
   name                     = "ExampleMaintenanceWindow"
   schedule                 = "cron(0 10 * * ? *)" # This is the cron expression for 8:05 AM CST
   schedule_timezone        = "CST6CDT" # Central Standard Time (CST)
-  duration                 = 0.5
+  duration                 = 1
   cutoff                   = 0
   allow_unassociated_targets = true
   enabled                  = true
