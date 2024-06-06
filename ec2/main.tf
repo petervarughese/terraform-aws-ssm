@@ -15,7 +15,7 @@ resource "aws_ssm_patch_baseline" "al_patch_baseline" {
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux"]
+      values = ["AmazonLinux2018.03"]
     }
 
     patch_filter {
@@ -31,7 +31,7 @@ resource "aws_ssm_patch_baseline" "al_patch_baseline" {
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux"]
+      values = ["AmazonLinux2018.03"]
     }
 
     patch_filter {
@@ -47,7 +47,7 @@ resource "aws_ssm_patch_baseline" "al_patch_baseline" {
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux"]
+      values = ["AmazonLinux2018.03"]
     }
 
     patch_filter {
@@ -63,7 +63,7 @@ resource "aws_ssm_patch_baseline" "al_patch_baseline" {
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux"]
+      values = ["AmazonLinux2018.03"]
     }
 
     patch_filter {
@@ -83,13 +83,13 @@ resource "aws_ssm_patch_baseline" "al_patch_baseline" {
 
 resource "aws_ssm_patch_baseline" "al2022_patch_baseline" {
   name            = "AmazonLinux2022PatchBaseline"
-  description     = "Patch baseline for Amazon Linux 2022"
+  description     = "Patch baseline for Amazon Linux 2"
   operating_system = "AMAZON_LINUX_2"
 
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux2022"]
+      values = ["AmazonLinux2"]
     }
 
     patch_filter {
@@ -105,7 +105,7 @@ resource "aws_ssm_patch_baseline" "al2022_patch_baseline" {
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux2022"]
+      values = ["AmazonLinux2"]
     }
 
     patch_filter {
@@ -121,7 +121,7 @@ resource "aws_ssm_patch_baseline" "al2022_patch_baseline" {
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux2022"]
+      values = ["AmazonLinux2"]
     }
 
     patch_filter {
@@ -137,7 +137,7 @@ resource "aws_ssm_patch_baseline" "al2022_patch_baseline" {
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux2022"]
+      values = ["AmazonLinux2"]
     }
 
     patch_filter {
@@ -157,13 +157,13 @@ resource "aws_ssm_patch_baseline" "al2022_patch_baseline" {
 
 resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
   name            = "AmazonLinux2023PatchBaseline"
-  description     = "Patch baseline for Amazon Linux 2023"
+  description     = "Patch baseline for Amazon Linux 2"
   operating_system = "AMAZON_LINUX_2"
 
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux2023"]
+      values = ["AmazonLinux2"]
     }
 
     patch_filter {
@@ -179,7 +179,7 @@ resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux2023"]
+      values = ["AmazonLinux2"]
     }
 
     patch_filter {
@@ -195,7 +195,7 @@ resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux2023"]
+      values = ["AmazonLinux2"]
     }
 
     patch_filter {
@@ -211,7 +211,7 @@ resource "aws_ssm_patch_baseline" "al2023_patch_baseline" {
   approval_rule {
     patch_filter {
       key    = "PRODUCT"
-      values = ["AmazonLinux2023"]
+      values = ["AmazonLinux2"]
     }
 
     patch_filter {
